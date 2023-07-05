@@ -4,7 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ const Signup = () => {
     try {
       setLoading(true);
       const res = await axios.post("api/users/signup", user);
-      toast.success("SignUp success");
+      toast.success("SignUp success",{duration:5000});
       console.log("SignUp success", res.data);
       router.push("/login");
     } catch (error: any) {

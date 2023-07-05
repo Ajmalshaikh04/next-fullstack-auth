@@ -1,24 +1,53 @@
 "use client";
+
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const onLogin=()=>{
-    
-  }
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const onLogin = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.post("api/users/login", user);
+      
+      console.log(res);
+      router.push("/profile");
+      
+      toast.success("LogIn Successfully",{duration:2000})
+      
+    } catch (error: any) {
+      console.log("Login failed", error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="mb-8 text-2xl font-semibold">Log In</h1>
-      
+      <h1 className="mb-8 text-2xl font-semibold">
+        {loading ? "Processing" : "Log In"}
+      </h1>
+
       <label htmlFor="email">email</label>
       <input
         type="email"
@@ -37,10 +66,20 @@ const Login = () => {
         placeholder="Password"
         className="px-4 py-2 mb-4 mb-8 leading-normal text-black placeholder-gray-400 border border-yellow-300 appearance-none rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
       />
-      <button className="px-6 py-2 mt-4 font-semibold text-black transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
-      onClick={onLogin}
-      >Log In</button>
-  <Link href={'/signup'} className="mt-4 hover:underline hover:underline-offset-4">Visit Sign up page</Link>
+
+      <button
+        className="px-6 py-2 mt-4 font-semibold text-black transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
+        onClick={onLogin}
+      >
+        Log In
+      </button>
+      <Toaster position="top-right" />
+      <Link
+        href={"/signup"}
+        className="mt-4 hover:underline hover:underline-offset-4"
+      >
+        Visit Sign up page
+      </Link>
     </div>
   );
 };
