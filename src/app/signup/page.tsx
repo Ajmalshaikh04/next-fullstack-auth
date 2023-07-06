@@ -74,7 +74,7 @@ const Signup = () => {
         name="password"
         onChange={(e) => setUser({ ...user, password: e.target.value })}
         placeholder="Password"
-        className="px-4 py-2 mb-4 mb-8 leading-normal text-black placeholder-gray-400 border border-yellow-300 appearance-none rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+        className="px-4 py-2 mb-4 leading-normal text-black placeholder-gray-400 border border-yellow-300 appearance-none rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
       />
       <button
         className="px-6 py-2 mt-4 font-semibold text-black transition-colors duration-200 bg-yellow-500 rounded-full hover:bg-yellow-600"
