@@ -20,7 +20,7 @@ const Signup = () => {
     try {
       setLoading(true);
       const res = await axios.post("api/users/signup", user);
-      toast.success("SignUp success",{duration:5000});
+      toast.success("SignUp success",{duration:3000});
       console.log("SignUp success", res.data);
       router.push("/login");
     } catch (error: any) {
@@ -82,7 +82,6 @@ const Signup = () => {
       >
         {buttonDisabled ? "No Sign" : "Sign Up"}
       </button>
-      <Toaster position="top-right" />
       <Link
         href={"/login"}
         className="mt-4 hover:underline hover:underline-offset-4"

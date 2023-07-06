@@ -24,7 +24,7 @@ const Login = () => {
       console.log(res);
       router.push("/profile");
       
-      toast.success("LogIn Successfully",{duration:2000})
+      toast.success("LogIn Successfully",{duration:3000})
       
     } catch (error: any) {
       console.log("Login failed", error.message);
@@ -73,7 +73,6 @@ const Login = () => {
       >
         Log In
       </button>
-      <Toaster position="top-right" />
       <Link
         href={"/signup"}
         className="mt-4 hover:underline hover:underline-offset-4"
